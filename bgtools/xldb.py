@@ -32,6 +32,9 @@ from datetime import date, timedelta
 from tempfile import mkstemp
 
 def get_xlvalue(h_):
+    '''Returns contents of cell, stripping plain-text out of unicode.
+    
+    '''
     if hasattr(h_.value, "encode"):
         return h_.value.encode()
     else:
