@@ -1,0 +1,15 @@
+bgTools - Python Utilities
+==========================
+
+A collection of widgets to make life easier
+
+Installation
+------------
+
+Distutils:
+
+    python setup.py build
+    python setup.py install
+
+
+
