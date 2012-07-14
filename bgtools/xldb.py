@@ -142,7 +142,7 @@ class XLSReader(object):
                     header=True, dkey=0,
                     startrow=0, numrows=None):
         '''
-        Reads rows in a given sheet. Returns (refcolumn, hdr, qdata)
+        Reads rows in a given sheet. Returns (keys, hdr, qdata)
         
         sheet:  Name of sheet or 0-indexed sheet number.          
                         
@@ -376,21 +376,34 @@ class XLdb(object):
                                          header, idx_column,
                                          startrow, numrows)
         
-        for attr in ['refcolumn', 'hdr', 'qdata']:
-            setattr(self, attr, getattr(sheetdb, attr, None))    
+        for attr in ['_refcolumn', '_hdr', '_qdata']:
+            setattr(self, attr, getattr(sheetdb, attr.strip('_'), None))    
         
         self.book.unload_sheet(self.sh.name)
         self.book.release_resources()
     
+    @property
+    def keys(self):
+        return self._refcolumn
+    
+    @property
+    def hdr(self):
+        return self._hdr
+    
+    @property
+    def data(self):
+        return self._qdata
+    
+    
     def get(self, key, default=None):
         if self.qdata:
-            return self.qdata.get(key, default)
+            return self._qdata.get(key, default)
         else:
             return default
             
     def __getitem__(self, key):
-        if self.qdata:
-            return self.qdata.get(key, None)
+        if self._qdata:
+            return self._qdata.get(key, None)
         else:
             return None
     
@@ -404,7 +417,7 @@ class XLdb(object):
         spreadsheet data, not and error.
         
         '''
-        colList = [self.qdata[recx].get(columnName, None) 
+        colList = [self._qdata[recx].get(columnName, None) 
                    for recx in self.refcolumn]
                    
         if reduce:

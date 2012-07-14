@@ -12,9 +12,9 @@ import re
 from datetime import date
             
 stddate_re = re.compile("[-//]".join(
-        ("(?P<Y>[0][1-9]|[1][0-2]|[1-9]{1})", #regex month
-         "(?P<M>[0][1-9]|[1-3][0-9]|[1-9]{1})", #regex day
-         "(?P<D>[1-9][0-9]{3}|[0-9][0-9])")   #regex year
+        ("(?P<M>[0][1-9]|[1][0-2]|[1-9]{1})", #regex month
+         "(?P<D>[0][1-9]|[1-3][0-9]|[1-9]{1})", #regex day
+         "(?P<Y>[1-9][0-9]{3}|[0-9][0-9])")   #regex year
          )
     )
                                   
@@ -33,7 +33,8 @@ def ccyymmdd(date_long):
     if matched is None:
         return None
     
-    y, m, d = map(int, (matched.group('Y'), m.group('M'), m.group('D')))
+    mdict = matched.groupdict()
+    y, m, d = map(int, (mdict['Y'],  mdict['M'], mdict['D']))
 
     return y, m, d
     
@@ -64,13 +65,15 @@ def strdate_tuple(sdate, twodigitlag=40):
     '''
     sdate = str(sdate) # in case int is given
     
-    matched = [re.match(stddate_re, sdate),
+    matches = [re.match(stddate_re, sdate),
                re.match(isodate_re, sdate),
                re.match(longdate_re, sdate)]
     
-    for x in matched:
+    for x in matches:
         if x:
-            y, m, d = map(int, (matched.group('Y'), m.group('M'), m.group('D')))
+            mdict = x.groupdict()
+            y, m, d = map(int, (mdict['Y'],  mdict['M'], mdict['D']))
+
             return adjust_year(y, twodigitlag), m, d
     
     return None

@@ -11,5 +11,5 @@ Copyright 2012 BG Research LLC. All rights reserved.
 __all__ = ['timing', 'fcompare', 'code_timer', 'timer']
 
 from timings import timing, fcompare, code_timer, timer
-from develtools import dirpub
+from devel import dirpub
 

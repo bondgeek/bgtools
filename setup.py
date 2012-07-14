@@ -4,6 +4,6 @@ setup(name='bgtools',
       packages=['bgtools',
                 'bgtools.math', 
                 'bgtools.studies', 
-                'bgtools.tools']
+                'bgtools.utils']
       )
 
