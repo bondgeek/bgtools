@@ -82,3 +82,10 @@ def str_to_date(sdate, twodigitlag=40):
     dt_tuple = strdate_tuple(sdate, twodigitlag)
     
     return date(*dt_tuple) if dt_tuple else None
+
+def incr_date(pydate, incr=0):
+    try:
+        return date.fromordinal(pydate.toordinal()+incr)    
+    except:
+        return None
+        

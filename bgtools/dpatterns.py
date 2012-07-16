@@ -91,11 +91,12 @@ class Record(dict):
     '''
     General purpose structured data record.
     
-    Given attribute list, insures that key for each attr exists and that only those
-    attributes can be added.  
+    Given attribute list, insures that key for each attr exists and 
+    that only those attributes can be added.  
     
-    WARNING: updates 'bounce off' if attr is not in defined list. No error is thrown
-    if you try to update an attribute that is not defined--nothing happens.
+    WARNING: updates 'bounce off' if attr is not in defined list. 
+    No error is thrown
+    If you try to update an attribute that is not defined--nothing happens.
     
     Returns True if set is successful, None otherwise.
     
