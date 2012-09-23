@@ -10,6 +10,50 @@ Copyright 2012 BG Research LLC. All rights reserved.
 
 import re
 from datetime import date
+
+re_mm = "(?P<M>1[0-2]|0[1-9]|[1-9])"
+re_dd = "(?P<D>[0-2][0-9]|3[01]|[1-9])"
+re_yyyy = "(?P<Y>[1-9][0-9]{3})"
+
+re_ccyymmdd = re.compile("(?P<Y>[1-9][0-9]{3})(?P<M>[01][0-9])(?P<D>[0-3][0-9])")                                  
+
+re_mm_dd_yyyy = re.compile( "(-|/)".join((re_mm, re_dd, re_yyyy)) )                                         
+re_yyyy_mm_dd = re.compile( "(-|/)".join((re_yyyy, re_mm, re_dd)) )
+
+
+def parse_datetuple(sdate):
+    '''Parses ccyymmdd, mm/dd/yyyy or yyyy/mm/dd  
+    Returns date tuple: (ccyy, mm, dd) or None if input does not match 
+    one of the patterns.
+    
+    Note: input can be a string or integer (for ccyymmdd pattern).
+    
+    '''
+    sdate = str(sdate)
+    
+    regex_strings = [re_ccyymmdd, re_mm_dd_yyyy, re_yyyy_mm_dd]
+    matches = [re.match(x, sdate) for x in regex_strings]
+    
+    for m in matches:
+        if m:
+            return map(int, (m.group('Y'), m.group('M'), m.group('D')))
+    
+    return None
+    
+    
+def parse_date(sdate):
+    '''Parses ccyymmdd, mm/dd/yyyy or yyyy/mm/dd  
+    Returns datetime.date or None if input does not match 
+    one of the patterns.
+    
+    Note: input can be a string or integer (for ccyymmdd pattern).
+
+    '''
+    tple = parse_datetuple(sdate)
+    
+    return date(*tple) if tple else None
+    
+        
             
 stddate_re = re.compile("[-//]".join(
         ("(?P<M>[0][1-9]|[1][0-2]|[1-9]{1})", #regex month
@@ -25,11 +69,10 @@ isodate_re = re.compile("[-//]".join(
         )
     )
 
-longdate_re = re.compile("(?P<Y>[1-9][0-9]{3})(?P<M>[0-1][0-9])(?P<D>[0-3][0-9])")                                  
 
 def ccyymmdd(date_long):
     "returns m, d, y for ccyymmdd date (either integer or string)"
-    matched = re.match(longdate_re, str(date_long))
+    matched = re.match(re_ccyymmdd, str(date_long))
     if matched is None:
         return None
     
@@ -53,36 +96,7 @@ def adjust_year( y, twodigitlag=40):
     
     return y
             
-def strdate_tuple(sdate, twodigitlag=40):
-    '''
-    Given a date in string format return year, month, day tuple
-    - year is in ccyy format
-    - date string may use either "-" or "/" separators
-    - date string may be mm/dd/ccyy, mm/dd/yy, ccyy-mm-dd, yy-mm-dd 
-      or ccyymmdd formats
-    - an integer ccyymmdd also works (but not yymmdd).
-    
-    '''
-    sdate = str(sdate) # in case int is given
-    
-    matches = [re.match(stddate_re, sdate),
-               re.match(isodate_re, sdate),
-               re.match(longdate_re, sdate)]
-    
-    for x in matches:
-        if x:
-            mdict = x.groupdict()
-            y, m, d = map(int, (mdict['Y'],  mdict['M'], mdict['D']))
-
-            return adjust_year(y, twodigitlag), m, d
-    
-    return None
-
-def str_to_date(sdate, twodigitlag=40):
-    dt_tuple = strdate_tuple(sdate, twodigitlag)
-    
-    return date(*dt_tuple) if dt_tuple else None
-
+            
 def incr_date(pydate, incr=0):
     try:
         return date.fromordinal(pydate.toordinal()+incr)    
