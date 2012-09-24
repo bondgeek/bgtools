@@ -2,7 +2,7 @@ from datetime import date
 
 from matplotlib.finance import quotes_historical_yahoo
 
-from bgpy.QL import toPyDate
+from bgtools.utils.dates import parse_date
 
 quote_header = ['date', 'open', 'high', 'low', 'close', 'volume']
 
@@ -17,7 +17,7 @@ def quotes_yahoo(ticker, begin, end=None, mode='d'):
     '''
     
     # construct date range for query
-    begin, end = map(toPyDate, (begin, end))
+    begin, end = map(parse_date, (begin, end))
     if not end: 
         end = date.today()
 
