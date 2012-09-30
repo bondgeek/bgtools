@@ -3,6 +3,7 @@ import os
 from tempfile import mkstemp
 from datetime import date
 
+# TODO: use pandas.Series as input
 def timeseries_chart(tsdata, filename=None, fdir=None, **kwgs):
     '''
     >timeseries_chart(tsdata, 

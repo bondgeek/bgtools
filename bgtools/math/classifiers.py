@@ -4,7 +4,10 @@ functions used in classifying data
 
 
 def flatn(obj, levels=None, _ltypes = (list, tuple), _counter=0):
-    '''flatten a list or tuple specified levels'''
+    '''
+    flatten a list or tuple specified levels
+    
+    '''
     if isinstance(obj, _ltypes):
         objtype = type(obj)
 
@@ -26,7 +29,14 @@ def flatn(obj, levels=None, _ltypes = (list, tuple), _counter=0):
 def get_values(inlist, sort=True):
     '''
     (iterable, sort=True) -> discrete values in list, sorted by default
+    
+    E.g.
+    > x = ['a', 'b', 'c', 'a', 6]
+    > get_values(x)
+    ['a', 'b', 'c', 6]
+    
     '''
+    
     values = [obj for n, obj in enumerate(inlist) 
             if obj not in inlist[n+1:]]
 

@@ -3,6 +3,7 @@ from scipy.optimize import fmin
 
 from ..dpatterns import Struct
 
+# TODO: use pandas.Series
 def garch_var(parms, variance, observed_value):
     '''
     GARCH variance estimate

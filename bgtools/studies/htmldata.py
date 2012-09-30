@@ -1,3 +1,8 @@
+'''
+This is obsolete given pandas' Reader module
+
+'''
+
 from datetime import date
 
 from matplotlib.finance import quotes_historical_yahoo

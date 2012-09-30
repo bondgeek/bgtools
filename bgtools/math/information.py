@@ -1,7 +1,5 @@
-from math import log
+from numpy import log, log2
 from classifiers import levels
-
-log2 = lambda x: log(x,2)
 
 def hlog(p):
     if p:

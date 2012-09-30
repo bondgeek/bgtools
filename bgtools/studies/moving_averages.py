@@ -1,4 +1,5 @@
 
+# TODO: use pandas.Series as input
 class StudySeries(object):
     def __init__(self, study_object, study_data=None):
         '''
