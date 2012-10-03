@@ -12,8 +12,10 @@ class SolverExceptions(Exception):
 def Secant(x0, x1, valueFunc, objectiveValue):
         '''
         value function must be of one variable
+        
         '''
-        MAXITER, MINVAL = SolverExceptions.MAX_ITERATIONS, SolverExceptions.MIN_VALUE
+        MAXITER, MINVAL = (SolverExceptions.MAX_ITERATIONS, 
+                           SolverExceptions.MIN_VALUE)
         
         #make sure x0 & x1 are different
         if abs(x1 - x0) <= MINVAL:
@@ -33,8 +35,11 @@ def Secant(x0, x1, valueFunc, objectiveValue):
             x0, v_ = x1, v1
             ictr += 1
             # check at end to ensure at least one pass
-            ok_go = abs(v_diff) > MINVAL and abs(delta) > MINVAL  and ictr < MAXITER
+            ok_go = abs(v_diff) > MINVAL and \
+                    abs(delta) > MINVAL  and ictr < MAXITER
 
-        assert (ictr < MAXITER+1), "Secant: Max iterations reached: %s" % x1*100.0
+        msg_maxIt = "Secant: Max iterations reached: {}".format(x1*100.0)
+        assert (ictr < MAXITER+1), msg_maxIt
+        
         return x1
         
