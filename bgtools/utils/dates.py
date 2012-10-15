@@ -69,7 +69,14 @@ isodate_re = re.compile("[-//]".join(
         )
     )
 
-
+def int_date(pydate):
+    pydate = parse_date(pydate)
+    if not pydate:
+        return None
+    
+    return pydate.year * 10000 + pydate.month * 100 + pydate.day
+    
+    
 def ccyymmdd(date_long):
     "returns m, d, y for ccyymmdd date (either integer or string)"
     matched = re.match(re_ccyymmdd, str(date_long))
