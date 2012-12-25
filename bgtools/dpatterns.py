@@ -123,9 +123,17 @@ class Record(dict):
         """
         If valueDict is a dict like object, gets members,
         otherwise gets attributes.
+        
         """
         if hasattr(valueDict, "__getitem__"):
-            gettr = lambda x: valueDict.__getitem__(x, None)
+            def gettr(x): 
+                try:
+                    rv = valueDict.__getitem__(x)
+                except:
+                    rv = None
+                
+                return rv
+            
         else:
             gettr = lambda x: getattr(valueDict, x, None)
         
@@ -133,10 +141,12 @@ class Record(dict):
             val = gettr(k)
             if val:
                 self.__setitem__(k, val)
+                
     
     def __getitem____(self, k, default=None):
         if k in self.attrs:
             return dict.__getitem__(self, k, default)
+
         else:
             return default
         
@@ -152,6 +162,7 @@ class Record(dict):
             
     def __setattr__(self, k, v):
         return self.__setitem__(k, v)
+        
                 
 class Struct(dict):
     '''
