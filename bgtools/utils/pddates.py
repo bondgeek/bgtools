@@ -52,8 +52,14 @@ def offset_index(df, n=-1, offsetClass=BDay, fOffset=nOffset):
     return [(dt, dt0) for dt, dt0 in dtoffset if not pd.isnull(dt0)]
 
 
-def df_index_meperiods(df, freq='M'):
-    start_dt, end_dt = df.index.min(), df.index.max(), 
+def df_index_bdays(tseries, freq='M'):
+    '''
+    Create a list of dates from a pandas timeseries, such that the new list
+    contains business days of the specified frequency.
+    '''
+    
+    start_dt, end_dt = tseries.index.min(), tseries.index.max()
+    
     x_dates = pd.date_range(start=start_dt, end=end_dt, freq=freq)
     
     me = lambda x: BDay().rollback(pd.Timestamp(x))
