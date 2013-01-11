@@ -63,7 +63,8 @@ def garch_loglike(parms, ydata, V0=None):
     # set initial value to long term variance
     variances = [V0]
     for n in range(1, len(y)):
-        variances.append( garch_var((omega, alpha, beta), variances[n-1], y[n-1]) )
+        variances.append( garch_var((omega, alpha, beta), 
+                                     variances[n-1], y[n-1]) )
          
     return -sum([loglikelihood_x(v, r) for v, r in zip(variances, y) ])
  
@@ -146,7 +147,8 @@ class GARCH(Struct):
                 
                     NOTE: model constrains gamma = (1-alpha-beta) > 0.   
         
-        returns a dictionary with keys:
+        returns a dictionary with keys
+        
         v:          time series of variance estimates
         mu:         drift estimate
         garch:      estimated GARCH parameters, alpha, beta, omega
@@ -200,7 +202,7 @@ class GARCH(Struct):
         self['v_estimates'] = variance_est
         return variance_est
         
-    def estimate_volatility(self, annualize=260):
+    def estimate_volatility(self, annualize=252):
         '''
         vol_series: creates a series of annualized variances
         
