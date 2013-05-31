@@ -9,32 +9,38 @@ http://www.python.org/doc/essays/list2str.html
 __all__ = ['timing', 'fcompare', 'code_timer', 'timer']
 
 import time
-import time  
-
 
 # Guido's timing function
 def timing(f, n, a):
-    '''timing(f, n, a) runs function, f, 10*n times using args, a'''
-    print(f.__name__)
+    '''
+    timing(f, n, a) runs function, f, 10*n times using args, a
+    
+    '''
+
     r = range(n)
-    t1 = time.clock()
+    
+    t1 = time.clock()    
     for i in r:
         f(a); f(a); f(a); f(a); f(a); f(a); f(a); f(a); f(a); f(a)
     t2 = time.clock()
-    print(round(t2-t1, 3))
+    
     return  (f.__name__, round(t2-t1, 3))
 
 def fcompare(flist, n , arg):
     '''
     fcompare(flist, n , arg) -> comparison
+    
     '''
     import operator
     times = []
+    
     for f in flist:
         times.append((f.__name__, timing2(f,n,arg)[1]))
     times.sort(key=operator.itemgetter(1))
+    
     for f in times:
         print("%s:   %s seconds" % (f[0], f[1]))
+    
     return times
 
 
