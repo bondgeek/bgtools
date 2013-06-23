@@ -8,11 +8,14 @@ Created August 2010
 import time  
 import re
 
+
 def dirpub(obj):
     '''
     List of public attributes of the given object.
+
     '''
     return [attr for attr in dir(obj) if not re.match("_+",attr)]
+
 
 def dirpubf(obj):
     '''
@@ -21,6 +24,7 @@ def dirpubf(obj):
     return [attr for attr in dirpub(obj) 
             if (type(getattr(obj, attr)).__name__ == 'function' or
                 type(getattr(obj, attr)).__name__ == 'instancemethod')]
+
 
 def dirpubv(obj):
     '''
@@ -35,6 +39,7 @@ def dirpubv(obj):
 
         mdict[tname] = alist
     return mdict
+
 
 def dirshow(obj, showdocs = True, return_dict=False):
     '''
@@ -56,6 +61,7 @@ def dirshow(obj, showdocs = True, return_dict=False):
     attrs = attrs if return_dict else None
     
     return attrs
+
 
 def f_reload(obj):
     '''

@@ -10,42 +10,45 @@ __all__ = ['timing', 'fcompare', 'code_timer', 'timer']
 
 import time
 
+
 # Guido's timing function
 def timing(f, n, a):
     '''
     timing(f, n, a) runs function, f, 10*n times using args, a
-    
+
     '''
 
     r = range(n)
-    
-    t1 = time.clock()    
-    for i in r:
-        f(a); f(a); f(a); f(a); f(a); f(a); f(a); f(a); f(a); f(a)
-    t2 = time.clock()
-    
-    return  (f.__name__, round(t2-t1, 3))
 
-def fcompare(flist, n , arg):
+    t1 = time.clock()
+    for i in r*10:
+        f(a)
+    t2 = time.clock()
+
+    return (f.__name__, round(t2-t1, 3))
+
+
+def fcompare(flist, n, arg):
     '''
     fcompare(flist, n , arg) -> comparison
-    
+
     '''
     import operator
     times = []
-    
+
     for f in flist:
-        times.append((f.__name__, timing2(f,n,arg)[1]))
+        times.append((f.__name__, timing2(f, n, arg)[1]))
+
     times.sort(key=operator.itemgetter(1))
-    
+
     for f in times:
         print("%s:   %s seconds" % (f[0], f[1]))
-    
+
     return times
 
 
 def code_timer(code1, code2, n):
-    
+
     r = range(n)
     t1 = time.clock()
     exec(code1)
@@ -55,19 +58,22 @@ def code_timer(code1, code2, n):
     t1 = time.clock()
     exec(code2)
     t2 = time.clock()
-    elapsed2 = round(t2-t1,3)
+    elapsed2 = round(t2-t1, 3)
 
-    diagnostic = "code1: %.3f, code2: %.3f" %(elapsed1, elapsed2)
+    diagnostic = "code1: %.3f, code2: %.3f" % (elapsed1, elapsed2)
 
     return diagnostic
 
 
 class timer(object):
-    '''Returns how much time has elapsed since the previous call'''
+    '''
+    Returns how much time has elapsed since the previous call
+
+    '''
     def __init__(self):
         self.initialtime = time.clock()
         self.prevtime = self.initialtime
-    
+
     def lap(self):
         '''Returns how time has elapsed since the previous call'''
         tnow = time.clock()
@@ -82,14 +88,14 @@ if __name__ == "__main__":
     #code_timer example
 
     c1 = ";".join(["TList = [random.random() for i in range(10000)]",
-                   "TList.sort(reverse = True)", 
-                   "new1 = TList", 
+                   "TList.sort(reverse = True)",
+                   "new1 = TList",
                    "l1 = len(new1)"])
-    
+
     c2 = ";".join(["TList2 = [random.random() for i in range(10000)]",
-                   "new2 = sorted(TList2, reverse = True)", 
+                   "new2 = sorted(TList2, reverse = True)",
                    "l2 = len(new2)"])
-        
+
     # timings example
     # some functions to check if an object is a sequence
     def isit(obj):
@@ -99,11 +105,11 @@ if __name__ == "__main__":
         except TypeError:
             return False
 
-    isit2 = lambda obj: (isinstance(obj, basestring) or 
-                         getattr(obj,'__iter__', False))
+    isit2 = lambda obj: (isinstance(obj, basestring) or
+                         getattr(obj, '__iter__', False))
 
     def isit3(obj):
-        return (isinstance(obj,basestring) or getattr(obj,'__iter__',False))
+        return (isinstance(obj, basestring) or getattr(obj, '__iter__', False))
 
     #...then:
     '''
@@ -114,4 +120,5 @@ if __name__ == "__main__":
 
     >>> timing(isit, 100000, [])
     isit 0.53
+
     '''

@@ -17,4 +17,6 @@ swig/example/example_wrap.c
 # system files / osx noise
 .DS_Store
 
-
+# Sphinx build directories and Makefile
+docs/_*
+Make
