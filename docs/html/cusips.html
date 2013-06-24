@@ -8,7 +8,7 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     
-    <title>Python Module Index &mdash; bgtools 0.1 documentation</title>
+    <title>cusips &mdash; bgtools 0.1 documentation</title>
     
     <link rel="stylesheet" href="_static/default.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
@@ -26,9 +26,7 @@
     <script type="text/javascript" src="_static/underscore.js"></script>
     <script type="text/javascript" src="_static/doctools.js"></script>
     <link rel="top" title="bgtools 0.1 documentation" href="index.html" />
- 
-
-
+    <link rel="prev" title="Introduction" href="intro.html" /> 
   </head>
   <body>
     <div class="related">
@@ -38,8 +36,11 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="#" title="Python Module Index"
+          <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="intro.html" title="Introduction"
+             accesskey="P">previous</a> |</li>
         <li><a href="index.html">bgtools 0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>  
@@ -49,29 +50,36 @@
         <div class="bodywrapper">
           <div class="body">
             
+  <div class="section" id="cusips">
+<h1>cusips<a class="headerlink" href="#cusips" title="Permalink to this headline">¶</a></h1>
+<p>Utilities for manipulating CUSIP security identifiers</p>
+<span class="target" id="module-bgtools.cusips"></span><p>Utilities for handling cusip check digits</p>
+<p>&#64;author: bart mosley
+&#64;license: bg research llc, MIT License</p>
+<p>References:
+<a class="reference external" href="https://www.cusip.com/static/html/webpage/pdf/CUSIPIntro_%207.26.2007.pdf">https://www.cusip.com/static/html/webpage/pdf/CUSIPIntro_%207.26.2007.pdf</a></p>
+<dl class="function">
+<dt id="bgtools.cusips.cusipcheckdigit">
+<tt class="descclassname">bgtools.cusips.</tt><tt class="descname">cusipcheckdigit</tt><big>(</big><em>cusip</em><big>)</big><a class="headerlink" href="#bgtools.cusips.cusipcheckdigit" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculate and return check digit. 
+Assumes validated string&#8211;8 or 9 digits with alphas</p>
+</dd></dl>
 
-   <h1>Python Module Index</h1>
+<dl class="function">
+<dt id="bgtools.cusips.ischeckdigit">
+<tt class="descclassname">bgtools.cusips.</tt><tt class="descname">ischeckdigit</tt><big>(</big><em>cusip</em><big>)</big><a class="headerlink" href="#bgtools.cusips.ischeckdigit" title="Permalink to this definition">¶</a></dt>
+<dd><p>True if string has nine digits with the ninth being the check digit</p>
+</dd></dl>
 
-   <div class="modindex-jumpbox">
-   <a href="#cap-b"><strong>b</strong></a>
-   </div>
+<dl class="function">
+<dt id="bgtools.cusips.validate_cusip">
+<tt class="descclassname">bgtools.cusips.</tt><tt class="descname">validate_cusip</tt><big>(</big><em>cusip</em><big>)</big><a class="headerlink" href="#bgtools.cusips.validate_cusip" title="Permalink to this definition">¶</a></dt>
+<dd><p>Return validated full cusip, or None if validation fails
+validated cusip: uppercase alphas, with check digit
+validation:  8 digit core cusip, correct check digit if provided</p>
+</dd></dl>
 
-   <table class="indextable modindextable" cellspacing="0" cellpadding="2">
-     <tr class="pcap"><td></td><td>&nbsp;</td><td></td></tr>
-     <tr class="cap" id="cap-b"><td></td><td>
-       <strong>b</strong></td><td></td></tr>
-     <tr>
-       <td><img src="_static/minus.png" class="toggler"
-              id="toggle-1" style="display: none" alt="-" /></td>
-       <td>
-       <tt class="xref">bgtools</tt></td><td>
-       <em></em></td></tr>
-     <tr class="cg-1">
-       <td></td>
-       <td>&nbsp;&nbsp;&nbsp;
-       <a href="cusips.html#module-bgtools.cusips"><tt class="xref">bgtools.cusips</tt></a></td><td>
-       <em></em></td></tr>
-   </table>
+</div>
 
 
           </div>
@@ -79,6 +87,14 @@
       </div>
       <div class="sphinxsidebar">
         <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="intro.html"
+                        title="previous chapter">Introduction</a></p>
+  <h3>This Page</h3>
+  <ul class="this-page-menu">
+    <li><a href="_sources/cusips.txt"
+           rel="nofollow">Show Source</a></li>
+  </ul>
 <div id="searchbox" style="display: none">
   <h3>Quick search</h3>
     <form class="search" action="search.html" method="get">
@@ -103,8 +119,11 @@
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="#" title="Python Module Index"
+          <a href="py-modindex.html" title="Python Module Index"
              >modules</a> |</li>
+        <li class="right" >
+          <a href="intro.html" title="Introduction"
+             >previous</a> |</li>
         <li><a href="index.html">bgtools 0.1 documentation</a> &raquo;</li> 
       </ul>
     </div>

@@ -12,9 +12,7 @@ Contents:
    :maxdepth: 2
 
    intro
-
-.. automodule:: bgtools.cusips
-   :members:
+   cusips
 
 
 Indices and tables
