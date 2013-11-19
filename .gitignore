@@ -10,6 +10,8 @@
 .pydevproject
 *.so
 build/
+# aptana
+.settings
 
 # swig generated files
 swig/example/example.py

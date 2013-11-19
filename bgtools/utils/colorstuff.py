@@ -8,7 +8,6 @@ http://code.activestate.com/recipes/266466/
 '''
 
 import re
-import numpy as np
 import colorsys
 
 reg_html = re.compile(r"""^#?([0-9a-fA-F]|[0-9a-fA-F]{2})([0-9a-fA-F]|[0-9a-fA-F]{2})([0-9a-fA-F]|[0-9a-fA-F]{2})?$""")
