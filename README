@@ -12,5 +12,6 @@ Distutils:
     python setup.py build
     python setup.py install
 
+....and this use it
 
 
