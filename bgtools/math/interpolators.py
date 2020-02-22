@@ -9,6 +9,7 @@ def npinterp(x, xrange, yrange, leftValue=None, rightValue=None):
     Meant to mimic numpy call.
     '''
     return (zip(xrange, yrange), x, leftValue, rightValue)
+
     
 def interp(xyTuples, x, leftValue=None, rightValue=None):
     '''
