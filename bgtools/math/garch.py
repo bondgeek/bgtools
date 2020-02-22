@@ -3,6 +3,7 @@ from scipy.optimize import fmin
 
 from ..dpatterns import Struct
 
+
 # TODO: use pandas.Series
 def garch_var(parms, variance, observed_value):
     '''
@@ -17,6 +18,7 @@ def garch_var(parms, variance, observed_value):
 
     return omega + alpha*variance + beta*observed_value*observed_value
 
+
 def loglikelihood_x(variance, observed):
     '''
     Log Likelihood of observation, for zero-mean normal probability 
@@ -24,6 +26,7 @@ def loglikelihood_x(variance, observed):
     
     '''
     return -(np.log(variance) + (observed * observed) / variance)
+
 
 def garch_loglike(parms, ydata, V0=None):
     '''
@@ -68,6 +71,7 @@ def garch_loglike(parms, ydata, V0=None):
          
     return -sum([loglikelihood_x(v, r) for v, r in zip(variances, y) ])
  
+
 def garch_estimator(yseries, x0, var0=None):
     '''
     MLE estimation of GARCH parameters and drift for time series
@@ -96,6 +100,7 @@ def garch_estimator(yseries, x0, var0=None):
     # maximum likelihood estimates of GARCH parameters
     return fmin(garch_loglike, x0, args=(yseries, var0), xtol=1e-8)
 
+
 def variance_estimates(mleEst, yseries):
     if len(mleEst) > 2:
         mu, alpha, beta = mleEst    
@@ -114,6 +119,7 @@ def variance_estimates(mleEst, yseries):
                                        yseries_[n-1]) )
     
     return variance_est
+
 
 class GARCH(Struct):
     values_ = ['ydata',
