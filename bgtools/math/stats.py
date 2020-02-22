@@ -8,6 +8,7 @@ Created on Sat Sep 29 14:37:38 2012
 
 from math import exp
 
+
 def erfcc(x):
     """Complementary error function."""
     
@@ -21,6 +22,7 @@ def erfcc(x):
         return r
     else:
         return 2. - r
+
 
 def ncdf(x):
     return 1. - 0.5*erfcc(x/(2**0.5))
