@@ -1,5 +1,5 @@
 bgtools==1.0
-certifi==14.05.14
+certifi==2022.12.7
 gnureadline==6.3.3
 ipython==2.1.0
 jdcal==1.0
