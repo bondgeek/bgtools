@@ -76,7 +76,7 @@ def quotes_yahoo(ticker, begin, end=None, mode='d'):
                             tuple([x[h] for h in quote_header[1:]]))
     
     elif mode == 'l':
-        vTuple = lambda x: tuple([x[h] for h in quote_hdr])
+        vTuple = lambda x: tuple([x[h] for h in quote_header])
     
     else:
         return quotes
